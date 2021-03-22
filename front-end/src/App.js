@@ -12,7 +12,7 @@ function App() {
   const [state, dispatch] = useReducer(AppReducer, initState);
   return (
     <Router>
-      <AppContext.Provider values={{ state, dispatch }}>
+      <AppContext.Provider value={{ state, dispatch }}>
         <div className="App">
           <div className="container">
             <Header />

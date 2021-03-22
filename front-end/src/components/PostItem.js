@@ -12,7 +12,7 @@ function PostItem() {
         </p>
         <div className="post-footer">
           <div className="post-info">
-            <span>bt Kodeine</span>
+            <span>by Kodeine</span>
             <span>Date: 17/02/2021</span>
           </div>
           <div className="post-edit-delete">
