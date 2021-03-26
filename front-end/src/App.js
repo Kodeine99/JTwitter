@@ -10,7 +10,7 @@ import AppContext from "./components/AppContext";
 import axios from "axios";
 
 function App() {
-  const initState = { user: null, post: [] };
+  const initState = { user: null, posts: [] };
   const [state, dispatch] = useReducer(AppReducer, initState);
   // check current user moi khi page loaded
   const checkCurrentUser = useCallback(async () => {

@@ -1,53 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 
-function PostItem() {
+function PostItem({ post }) {
+  const [openEditForm, setOpenEditForm] = useState(false);
+  const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
+  let date = new Date(post.createdAt);
   return (
     <>
       <div className="post-item">
-        <p className="post-content">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum quasi
-          ducimus quibusdam amet! Quia dolores quaerat aperiam voluptatum,
-          tempore praesentium molestias eaque cumque, laboriosam deleniti, ex
-          vero facere quod nostrum?
-        </p>
+        <p className="post-content">{post.content}</p>
         <div className="post-footer">
           <div className="post-info">
-            <span>by Kodeine</span>
-            <span>Date: 17/02/2021</span>
+            <span>by {post.author.name}</span>
+            <span>
+              Date: {""}
+              {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
+            </span>
           </div>
-          <div className="post-edit-delete">
-            <span>Edit</span>
-            <span>Delete</span>
-            <span className="delete_question">Are you sure ?</span>
-            <span>Yes</span>
-            <span>No</span>
-          </div>
-        </div>
-        <div className="post-edit-form">
-          <form action="" className="edit-form">
-            <textarea
-              type="text"
-              name="content"
-              id="content"
-              className="content"
-              placeholder="What's ?"
-            >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut id
-              modi, ipsa in quod ad earum ratione placeat. Officiis reiciendis
-              placeat eos alias nisi, numquam hic dolores cumque nam, saepe
-              quasi dicta eum vitae velit, doloremque explicabo minima delectus
-              vero?
-            </textarea>
-            <div className="btn-container">
-              <button className="btn" type="button">
-                Update
-              </button>
-              <button className="btn" type="button">
-                Cancel
-              </button>
+          {post.isEditable && (
+            <div className="post-edit-delete">
+              {openDeleteConfirm ? (
+                <>
+                  <span className="delete_question">Are you sure ?</span>
+                  <span>Yes</span>
+                  <span onClick={() => setOpenDeleteConfirm(false)}>No</span>
+                </>
+              ) : (
+                <>
+                  <span onClick={() => setOpenEditForm(true)}>Edit</span>
+                  <span onClick={() => setOpenDeleteConfirm(true)}>Delete</span>
+                </>
+              )}
             </div>
-          </form>
+          )}
         </div>
+        {openEditForm && (
+          <div className="post-edit-form">
+            <form action="" className="edit-form">
+              <textarea
+                type="text"
+                name="content"
+                id="content"
+                className="content"
+                placeholder="What's ?"
+              >
+                {post.content}
+              </textarea>
+              <div className="btn-container">
+                <button className="btn" type="button">
+                  Update
+                </button>
+                <button
+                  onClick={() => setOpenEditForm(false)}
+                  className="btn"
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </>
   );

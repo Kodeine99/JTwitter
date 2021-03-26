@@ -3,9 +3,9 @@ export default function reducer(state, action) {
     case "CURRENT_USER":
       return { ...state, user: action.payload };
     case "GET_ALL_POSTS":
-      return { ...state, post: action.payload };
+      return { ...state, posts: action.payload };
     case "CREATE_ONE_POST":
-      return { ...state, post: [...state.posts, action.payload] };
+      return { ...state, posts: [...state.posts, action.payload] };
     case "UPDATE_ONE_POST":
       return {
         ...state,
